@@ -10,13 +10,15 @@ public class MainCam : MonoBehaviour
     public Text UiMultiplier;
     public Text UiScore;
     public static int score;
-    private static int _prev_score;
+    private static int _prev_score_multiplier;
+    private static int _prev_score_live;
     
     void Start()
     {
         multiplier = 1;
         score = 0;
-        _prev_score = 0;
+        _prev_score_multiplier = 0;
+        _prev_score_live = 0;
         multiplier_timer = Time.time;
         SetScore();
         SetMultiplier();
@@ -60,9 +62,13 @@ public class MainCam : MonoBehaviour
     }
     public static void AddScore(int num){
         score += num*multiplier;
-        if(_prev_score + 200*multiplier < score){
+        if(_prev_score_multiplier + 200*multiplier < score){
             AddMultiplier(true);
-            _prev_score = score;
+            _prev_score_multiplier = score;
+        }
+        if(_prev_score_live + 10 < score){
+            playerController.IncreaseLives();
+            _prev_score_live = score;
         }
     }
 
@@ -74,7 +80,7 @@ public class MainCam : MonoBehaviour
         }else{
             multiplier = 1;
             multiplier_timer = Time.time;
-            _prev_score = score;
+            _prev_score_multiplier = score;
         }
     }
 
