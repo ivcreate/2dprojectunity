@@ -818,9 +818,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 746540657}
-  score: {fileID: 1137153684}
-  multi: {fileID: 1953516810}
   cum_speed: 0.0025
+  UiMultiplier: {fileID: 1953516810}
+  UiScore: {fileID: 1137153684}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2044,6 +2044,7 @@ MonoBehaviour:
   Player: {fileID: 746540657}
   PauseUi: {fileID: 1050446923}
   DeathUi: {fileID: 1663012383}
+  monet_flag: 0
 --- !u!4 &953335967
 Transform:
   m_ObjectHideFlags: 0

@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Monetization;
+//using UnityEngine.Monetization;
 
 public class GameController : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class GameController : MonoBehaviour
     public Button DeathHome;
     public Button DeathRestart;
     public Button Sound;
-    public Button Video;
+    //public Button Video;
     public GameObject Player;
     public Canvas PauseUi;
     public Canvas DeathUi;
@@ -27,12 +25,12 @@ public class GameController : MonoBehaviour
     
 
     void Start(){
-        if(Monetization.isSupported) Monetization.Initialize("3220934",false);
+        //if(Monetization.isSupported) Monetization.Initialize("3220934",false);
         PauseUi.enabled = _pause_flag;
         DeathUi.enabled = false;
         Pause.onClick.AddListener(GamePause);
         StartBut.onClick.AddListener(GamePause);
-        Video.onClick.AddListener(OnVideo);
+        //Video.onClick.AddListener(OnVideo);
         Sound.onClick.AddListener(OnSound);
         Home.onClick.AddListener(ClickHome);
         Restart.onClick.AddListener(RestartGame);
@@ -44,7 +42,7 @@ public class GameController : MonoBehaviour
         sound_flag = !sound_flag;
     }
 
-    public void OnVideo(){
+/*    public void OnVideo(){
         ShowAdCallbacks options = new ShowAdCallbacks();
         options.finishCallback = HandleShowResalt;
         ShowAdPlacementContent ad = Monetization.GetPlacementContent("rewardedVideo") as ShowAdPlacementContent;
@@ -60,7 +58,7 @@ public class GameController : MonoBehaviour
         }else if(result == ShowResult.Failed){
 
         }
-    }
+    }*/
 
     public void RestartGame(){
         Debug.Log("fdsaf");

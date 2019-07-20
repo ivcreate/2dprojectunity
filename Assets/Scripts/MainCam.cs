@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MainCam : MonoBehaviour
@@ -71,10 +68,14 @@ public class MainCam : MonoBehaviour
 
     public static void AddMultiplier(bool Add = true){
         if(Add == true){
-            if(multiplier < 5)
+            if(multiplier < 5){
                 multiplier++;
-        }else
+            }
+        }else{
             multiplier = 1;
+            multiplier_timer = Time.time;
+            _prev_score = score;
+        }
     }
 
 }

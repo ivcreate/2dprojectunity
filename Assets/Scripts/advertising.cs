@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class advertising : MonoBehaviour, IUnityAdsListener
-{
+public class advertising : MonoBehaviour
+{/*
     string gameId = "1234567";
     string myPlacementId = "rewardedVideo";
     bool testMode = false;
@@ -34,4 +34,5 @@ public class advertising : MonoBehaviour, IUnityAdsListener
     public void OnUnityAdsDidStart (string placementId) {
         // Optional actions to take when the end-users triggers an ad.
     } 
+ */
 }
