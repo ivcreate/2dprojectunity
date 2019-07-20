@@ -21,11 +21,14 @@ public class GameController : MonoBehaviour
     private bool _click_home = false;
     public static bool sound_flag = true;
     public bool monet_flag = false;
-    
+
     
 
     void Start(){
-        //if(Monetization.isSupported) Monetization.Initialize("3220934",false);
+        /*if(Monetization.isSupported) 
+            Monetization.Initialize("3220934",true);
+        else 
+            Debug.Log("No Monetization object called wibble found");*/
         PauseUi.enabled = _pause_flag;
         DeathUi.enabled = false;
         Pause.onClick.AddListener(GamePause);
@@ -42,7 +45,7 @@ public class GameController : MonoBehaviour
         sound_flag = !sound_flag;
     }
 
-/*    public void OnVideo(){
+   /* public void OnVideo(){
         ShowAdCallbacks options = new ShowAdCallbacks();
         options.finishCallback = HandleShowResalt;
         ShowAdPlacementContent ad = Monetization.GetPlacementContent("rewardedVideo") as ShowAdPlacementContent;

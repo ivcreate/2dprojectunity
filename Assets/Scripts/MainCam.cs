@@ -66,7 +66,7 @@ public class MainCam : MonoBehaviour
             AddMultiplier(true);
             _prev_score_multiplier = score;
         }
-        if(_prev_score_live + 10 < score){
+        if(_prev_score_live + 10000 < score){
             playerController.IncreaseLives();
             _prev_score_live = score;
         }

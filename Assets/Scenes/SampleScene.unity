@@ -2040,7 +2040,6 @@ MonoBehaviour:
   DeathHome: {fileID: 1991067528}
   DeathRestart: {fileID: 1361212311}
   Sound: {fileID: 1087284198}
-  Video: {fileID: 1874720046}
   Player: {fileID: 746540657}
   PauseUi: {fileID: 1050446923}
   DeathUi: {fileID: 1663012383}
@@ -3170,6 +3169,7 @@ GameObject:
   - component: {fileID: 1874720048}
   - component: {fileID: 1874720047}
   - component: {fileID: 1874720046}
+  - component: {fileID: 1874720049}
   m_Layer: 5
   m_Name: Video
   m_TagString: Untagged
@@ -3280,6 +3280,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874720044}
   m_CullTransparentMesh: 0
+--- !u!114 &1874720049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874720044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ae4cc22cff5374092a02a6d1dbc17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1878326829
 PrefabInstance:
   m_ObjectHideFlags: 0
