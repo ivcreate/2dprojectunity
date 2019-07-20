@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour
         Pause.onClick.AddListener(GamePause);
         StartBut.onClick.AddListener(GamePause);
         Video.onClick.AddListener(OnVideo);
-
         Sound.onClick.AddListener(OnSound);
         Home.onClick.AddListener(ClickHome);
         Restart.onClick.AddListener(RestartGame);
