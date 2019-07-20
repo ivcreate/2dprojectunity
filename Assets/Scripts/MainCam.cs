@@ -12,14 +12,15 @@ public class MainCam : MonoBehaviour
     public Text UiMultiplier;
     public Text UiScore;
     public static int score;
+    private static int _prev_score;
     
     void Start()
     {
         multiplier = 1;
         score = 0;
+        _prev_score = 0;
         SetScore();
         SetMultiplier();
-        StartCoroutine("DoSpawnPlatform");
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -58,19 +59,18 @@ public class MainCam : MonoBehaviour
     }
     public static void AddScore(int num){
         score += num*multiplier;
-    }
-
-    IEnumerator DoSpawnPlatform()
-    {
-        for (; ; )
-        {
-            SpawnPlatform();
-            yield return new WaitForSeconds(5f);
+        if(_prev_score + 200*multiplier >= score){
+            AddMultiplier();
+            _prev_score = score;
         }
     }
- 
-    void SpawnPlatform()
-    {
-        Debug.Log("Hello");
+
+    public static void AddMultiplier(bool Add = true){
+        if(Add == true)
+            if(multiplier < 5)
+                multiplier++;
+        else
+            multiplier = 1;
     }
+
 }
