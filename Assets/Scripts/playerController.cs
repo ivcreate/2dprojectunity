@@ -90,6 +90,7 @@ public class playerController : MonoBehaviour
         }
         
        if(col.tag == "MainCamera" && lives <= 1){
+            MainCam.AddMultiplier(false);
             StartCoroutine("InvulTime");
             Handheld.Vibrate();
             lives--;
@@ -98,6 +99,7 @@ public class playerController : MonoBehaviour
             GameController contr = GameController.GetComponent<GameController>();
             contr.GameOver();
         }else if(col.tag == "MainCamera"){
+            MainCam.AddMultiplier(false);
             MainCam.multiplier = 1;
             StartCoroutine("InvulTime");
             Handheld.Vibrate();
@@ -108,6 +110,7 @@ public class playerController : MonoBehaviour
         
         if(invul_flag == false)
             if(col.tag == "Bomb" && lives <= 1){
+                MainCam.AddMultiplier(false);
                 StartCoroutine("InvulTime");
                 Handheld.Vibrate();
                 lives--;
@@ -123,6 +126,7 @@ public class playerController : MonoBehaviour
                 //bomb.wrapMode = WrapMode.Once;
                 bomb.Play("explo");
             }else if(col.tag == "Bomb"){
+                MainCam.AddMultiplier(false);
                 MainCam.multiplier = 1;
                 StartCoroutine("InvulTime");
                 Handheld.Vibrate();

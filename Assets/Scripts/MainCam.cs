@@ -9,6 +9,7 @@ public class MainCam : MonoBehaviour
     public GameObject player;
     public float cum_speed = 0.00005f;
     public static int multiplier;
+    public static float multiplier_timer;
     public Text UiMultiplier;
     public Text UiScore;
     public static int score;
@@ -19,6 +20,7 @@ public class MainCam : MonoBehaviour
         multiplier = 1;
         score = 0;
         _prev_score = 0;
+        multiplier_timer = Time.time;
         SetScore();
         SetMultiplier();
     }
@@ -30,16 +32,18 @@ public class MainCam : MonoBehaviour
         Vector3 pos = transform.position;
         if(player.transform.position.y > transform.position.y){
             pos.y = player.transform.position.y;
+            multiplier_timer = Time.time;
             AddScore(1);
         }else
             pos.y += cum_speed;
 
+        if(multiplier_timer + 2f < Time.time)
+            AddMultiplier(false);
         transform.position = pos;
         
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        
         if(other.tag == "Platform"){
             Destroy(other.gameObject);
         }
@@ -59,17 +63,17 @@ public class MainCam : MonoBehaviour
     }
     public static void AddScore(int num){
         score += num*multiplier;
-        if(_prev_score + 200*multiplier >= score){
-            AddMultiplier();
+        if(_prev_score + 200*multiplier < score){
+            AddMultiplier(true);
             _prev_score = score;
         }
     }
 
     public static void AddMultiplier(bool Add = true){
-        if(Add == true)
+        if(Add == true){
             if(multiplier < 5)
                 multiplier++;
-        else
+        }else
             multiplier = 1;
     }
 
