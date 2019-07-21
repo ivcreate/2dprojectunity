@@ -1,50 +1,61 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Monetization;
+using UnityEngine.Advertisements;
 
 [RequireComponent (typeof (Button))]
-public class Monetiz : MonoBehaviour {
+public class Monetiz : MonoBehaviour, IUnityAdsListener {
+    #if UNITY_IOS
+        private string gameId = "3220934";
+    #elif UNITY_ANDROID
+        private string gameId = "3220935";
+    #endif
 
-    public string placementId = "rewardedVideo";
-    private Button adButton;
+    Button myButton;
+    public string myPlacementId = "rewardedVideo";
 
-#if UNITY_IOS
-   private string gameId = "1234567";
-#elif UNITY_ANDROID
-    private string gameId = "3220934";
-#endif
+    void Start () {   
+        myButton = GetComponent <Button> ();
 
-    void Start () {
-        adButton = GetComponent<Button> ();
-        if (adButton) {
-            adButton.onClick.AddListener (ShowAd);
+        // Set interactivity to be dependent on the Placement’s status:
+        myButton.interactable = Advertisement.IsReady (myPlacementId); 
+
+        // Map the ShowRewardedVideo function to the button’s click listener:
+        if (myButton) myButton.onClick.AddListener (ShowRewardedVideo);
+
+        // Initialize the Ads listener and service:
+        Advertisement.AddListener (this);
+        Advertisement.Initialize (gameId, false);
+    }
+
+    // Implement a function for showing a rewarded video ad:
+    void ShowRewardedVideo () {
+        Advertisement.Show (myPlacementId);
+    }
+
+    // Implement IUnityAdsListener interface methods:
+    public void OnUnityAdsReady (string placementId) {
+        // If the ready Placement is rewarded, activate the button: 
+        if (placementId == myPlacementId) {        
+            myButton.interactable = true;
         }
+    }
 
-        if (Monetization.isSupported) {
-            Monetization.Initialize (gameId, false);
+    public void OnUnityAdsDidFinish (string placementId, ShowResult showResult) {
+        // Define conditional logic for each ad completion status:
+        if (showResult == ShowResult.Finished) {
+            // Reward the user for watching the ad to completion.
+        } else if (showResult == ShowResult.Skipped) {
+            // Do not reward the user for skipping the ad.
+        } else if (showResult == ShowResult.Failed) {
+            Debug.LogWarning ("The ad did not finish due to an error");
         }
     }
 
-    void Update () {
-        if (adButton) {
-            adButton.interactable = Monetization.IsReady (placementId);
-        }
+    public void OnUnityAdsDidError (string message) {
+        // Log the error.
     }
 
-    void ShowAd () {
-        ShowAdCallbacks options = new ShowAdCallbacks ();
-        options.finishCallback = HandleShowResult;
-        ShowAdPlacementContent ad = Monetization.GetPlacementContent (placementId) as ShowAdPlacementContent;
-        ad.Show (options);
-    }
-
-    void HandleShowResult (ShowResult result) {
-        if (result == ShowResult.Finished) {
-            Debug.Log ("Ok");
-        } else if (result == ShowResult.Skipped) {
-            Debug.LogWarning ("The player skipped the video - DO NOT REWARD!");
-        } else if (result == ShowResult.Failed) {
-            Debug.LogError ("Video failed to show");
-        }
-    }
+    public void OnUnityAdsDidStart (string placementId) {
+        // Optional actions to take when the end-users triggers an ad.
+    } 
 }
